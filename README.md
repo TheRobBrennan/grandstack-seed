@@ -75,6 +75,8 @@ Please see [Neo4j Browser User Interface Guide](https://neo4j.com/developer/neo4
 
 ## Seed project set-up
 
+For reference, I've created a sample `server/.env.sample` file that you can copy to `server/.env` and tweak as necessary.
+
 1. Create `.env` file in your `./server` directory with the following env variables:
 
  `NEO4J_URI= *example: bolt://localhost:8687*` (this can be a local instance of neo4j or a neo4j sandbox URI)
@@ -83,7 +85,7 @@ Please see [Neo4j Browser User Interface Guide](https://neo4j.com/developer/neo4
 
  `NEO4J_PASSWORD= *example: password*`
 
-2. Create a JWT encryption key using a service such as https://mkjwk.org/ this will be used for encryption in your username/password auth strategy. Once you have the key add it to your `./server`'s `.env` file like so:
+2. Create a JWT encryption key using a service such as [https://mkjwk.org/](https://mkjwk.org/) or [https://www.grc.com/passwords.htm](https://www.grc.com/passwords.htm). This will be used for encryption in your username/password auth strategy. Once you have the key add it to your `./server`'s `.env` file like so:
 
  `JWT_SECRET= *example: generated secret*`
 
