@@ -89,7 +89,7 @@ For reference, I've created a sample `server/.env.sample` file that you can copy
 
  `JWT_SECRET= *example: generated secret*`
 
-3. Install dependencies in the root and for both the server and client by running `npm (or yarn) install` in the root directory, followed by `npm (or yarn) run install-all` in the root directory.
+3. Install dependencies in the root and for both the server and client by running `npm install` in the root directory, followed by `npm run install-all` in the root directory.
 
 4. Start  both servers by running `npm start` in the root of the project`
 
