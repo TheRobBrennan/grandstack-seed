@@ -17,7 +17,9 @@ export const resolvers = {
         object,
         { email, password },
         context,
-        resolveInfo
+        resolveInfo,
+        // Set debug to false unless you want to see plain text passwords in your log 😳
+        false
       );
       if (!user) {
         throw new Error("No user with that email");

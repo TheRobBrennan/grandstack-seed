@@ -1,7 +1,7 @@
 import * as Yup from "yup";
 
 const emailRequired = "Email required";
-const passwordRequired = "Passwored required";
+const passwordRequired = "Password required";
 const emailLength = "Email must be at least 3 characters";
 const passwordLength = "Password must be at least 3 characters";
 const invalidEmail = "Email must be a valid Email";

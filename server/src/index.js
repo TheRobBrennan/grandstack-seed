@@ -12,7 +12,7 @@ import { resolvers } from "./resolvers";
 
 // Graph our environment variables from our .env file and create a variable for our JWT secret
 dotenv.config();
-export const SECRET = process.env.JWT_SECRET || "shittySecret8675309";
+export const SECRET = process.env.JWT_SECRET || "thisisabadsecrettousebutitworksforanexample";
 
 // Create express app
 export const app = express();
@@ -33,7 +33,10 @@ const injectUser = async req => {
     const { user } = await jwt.verify(token, SECRET);
     req.user = user;
   } catch (error) {
-    console.error(error);
+    // We don't care about null tokens; they will always be improperly formed JWT requests
+    if (!token || token === null) {
+      console.error(error);
+    }
   }
   req.next();
 };
