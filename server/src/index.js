@@ -33,7 +33,10 @@ const injectUser = async req => {
     const { user } = await jwt.verify(token, SECRET);
     req.user = user;
   } catch (error) {
-    console.error(error);
+    // We don't care about null tokens; they will always be improperly formed JWT requests
+    if (!token || token === null) {
+      console.error(error);
+    }
   }
   req.next();
 };
