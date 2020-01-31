@@ -1,6 +1,6 @@
 {
   "name": "grand-server",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "Express, GraphQL, and Neo4j backed server with built in JWT auth.",
   "main": "./src/index.js",
   "scripts": {
