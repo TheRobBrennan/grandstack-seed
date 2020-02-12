@@ -10,6 +10,10 @@ export const resolvers = {
     RegisterUser: async (object, params, context, resolveInfo) => {
       const user = params;
       user.password = await bcrypt.hash(user.password, 12);
+
+      // TODO: Do not create an account if we already have one for the supplied email address!
+
+      // We can safely create the user account
       return neo4jgraphql(object, user, context, resolveInfo, true);
     },
     Login: async (object, { email, password }, context, resolveInfo) => {
