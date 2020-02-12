@@ -23,13 +23,11 @@ export const resolvers = {
       );
       if (!user) {
         throw new Error("No user with that email");
-        return null;
       }
 
       const valid = await bcrypt.compare(password, user.password);
       if (!valid) {
         throw new Error("Incorrect password");
-        return null;
       }
 
       const signedToken = await createToken(
