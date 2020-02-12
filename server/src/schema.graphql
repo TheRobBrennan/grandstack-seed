@@ -22,7 +22,14 @@ type Query {
 type Mutation {
   RegisterUser(email: String!, password: String!, username: String!): User!
     @cypher(
-      statement: "CALL apoc.create.uuids(1) YIELD uuid CREATE (l:LOCAL_ACCOUNT {password: $password, email: $email})<-[:AUTHENTICATED_WITH]-(u:User {email: $email, username: $username, id: uuid}) RETURN u"
+      statement: """
+        // Generate a unique ID for the user account
+        CALL apoc.create.uuids(1) YIELD uuid
+
+        // Create the user account in our system
+        CREATE (l:LOCAL_ACCOUNT {password: $password, email: $email})<-[:AUTHENTICATED_WITH]-(u:User {email: $email, username: $username, id: uuid}) 
+        RETURN u
+      """
     )
   Login(email: String!, password: String!): String
     @cypher(
