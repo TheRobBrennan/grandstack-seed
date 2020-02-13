@@ -56,8 +56,8 @@ const Login = ({ classes }) => {
             <h1 className={classes.header}>Login</h1>
             <Formik
               initialValues={{
-                email: "",
-                password: ""
+                email: "rob@therobbrennan.com",
+                password: "testtest",
               }}
               onSubmit={({ email, password }) => {
                 Login({
