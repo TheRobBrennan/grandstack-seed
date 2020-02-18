@@ -31,7 +31,7 @@ function App() {
     <ApolloProvider client={client}>
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" component={Login} />
+          <Route exact path="/" children={<Login message={'Props are configured properly 🤓'} />} />
         </Switch>
       </BrowserRouter>
     </ApolloProvider>
