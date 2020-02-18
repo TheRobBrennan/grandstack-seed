@@ -1,5 +1,8 @@
 import React from 'react';
 
+// Components
+import Placeholder from './components/Placeholder';
+
 // Routing
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
@@ -27,7 +30,7 @@ function App() {
     <ApolloProvider client={client}>
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" component={() => (<div>[PLACEHOLDER]</div>)} />
+          <Route exact path="/" component={Placeholder} />
         </Switch>
       </BrowserRouter>
     </ApolloProvider>
