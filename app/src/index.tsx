@@ -8,6 +8,7 @@ import App from './App';
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache, NormalizedCacheObject } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
+import { ApolloProvider } from '@apollo/react-hooks';
 
 // Apollo and GraphQL constants
 const GRAPHQL_URI = 'http://localhost:8000/';
@@ -22,6 +23,8 @@ const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
 });
 
 ReactDOM.render(
-  <App />,
+  <ApolloProvider client={client}>
+    <App />
+  </ApolloProvider>,
   document.getElementById('root')
 );
