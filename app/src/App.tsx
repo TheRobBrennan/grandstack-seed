@@ -1,7 +1,6 @@
 import React from 'react';
 
 // Components
-import Placeholder from './components/placeholder/Placeholder';
 import Login from './components/login/Login';
 
 // Routing
