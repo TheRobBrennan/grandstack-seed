@@ -11,7 +11,7 @@ import { HttpLink } from 'apollo-link-http';
 import { ApolloProvider } from '@apollo/react-hooks';
 
 // Apollo and GraphQL constants
-const GRAPHQL_URI = 'http://localhost:8000/';
+const GRAPHQL_URI = 'http://localhost:8000/graphql';
 const cache = new InMemoryCache();
 const link = new HttpLink({
   uri: GRAPHQL_URI,
