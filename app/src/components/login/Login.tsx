@@ -1,11 +1,13 @@
 import React from 'react';
 
-interface LoginProps {
-  message?: string,
-}
+interface LoginProps {}
 
-export const Login: React.FC<LoginProps> = ({ message = '' }) => {
-  return (<div>A login form<br />{message}</div>);
+export const Login: React.FC<LoginProps> = () => {
+  return (
+    <>
+      <h1>Login</h1>
+    </>
+  );
 };
 
 export default Login;
