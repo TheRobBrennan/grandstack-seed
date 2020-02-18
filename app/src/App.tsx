@@ -1,5 +1,8 @@
 import React from 'react';
 
+// Routing
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+
 // Apollo and GraphQL imports
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache, NormalizedCacheObject } from 'apollo-cache-inmemory';
@@ -22,7 +25,11 @@ const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <div>[DEMO] GRANDstack | create-react-app</div>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={() => (<div>[PLACEHOLDER]</div>)} />
+        </Switch>
+      </BrowserRouter>
     </ApolloProvider>
   );
 }
