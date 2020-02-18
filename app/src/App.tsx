@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Components
-import Placeholder from './components/Placeholder';
+import Placeholder from './components/placeholder/Placeholder';
 
 // Routing
 import { BrowserRouter, Route, Switch } from "react-router-dom";
