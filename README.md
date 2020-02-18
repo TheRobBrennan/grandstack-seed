@@ -73,6 +73,16 @@ Please see [Neo4j Browser User Interface Guide](https://neo4j.com/developer/neo4
 
 ![screenshots/screenshot-09-example-launch-of-neo4j-browser.png](screenshots/screenshot-09-example-launch-of-neo4j-browser.png)
 
+## Client application
+
+For this project, we're going to replace the client originally supplied by the example code with a simple app.
+
+To generate a new app using [create-react-app](https://create-react-app.dev) and [TypeScript](https://create-react-app.dev/docs/adding-typescript/):
+
+```sh
+$ npx create-react-app app --template typescript
+```
+
 ## Seed project set-up
 
 For reference, I've created a sample `server/.env.sample` file that you can copy to `server/.env` and tweak as necessary.
