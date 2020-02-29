@@ -32,7 +32,7 @@ export const resolvers = {
         context,
         resolveInfo,
         // Set debug to false unless you want to see a plain text encrypted password in your log 😳
-        true
+        false
       )
         .then(result => {
           return result
