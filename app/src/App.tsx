@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Components
-import Placeholder from './components/placeholder/Placeholder';
+import { AuthRoute } from './components/auth-route/auth-route';
 import Login from './components/login/Login';
 import Register from './components/register/Register';
 
@@ -17,7 +17,6 @@ import { ApolloProvider } from '@apollo/react-hooks';
 
 import { GRAPHQL_URI } from './config/constants';
 import { authMiddleware } from './middleware/auth-middleware';
-import { checkAuth } from './lib/check-auth';
 
 // Apollo and GraphQL constants
 const httpLink = new HttpLink({
@@ -28,15 +27,6 @@ const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
   link: concat(authMiddleware, httpLink),
   cache: new InMemoryCache()
 });
-
-const AuthRoute = ({ ...props }) => (
-  <Route
-    {...props}
-    render={() =>
-      checkAuth() ? <Placeholder /> : <Redirect to={{ pathname: "/login" }} />
-    }
-  />
-);
 
 function App() {
   return (
