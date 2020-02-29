@@ -35,7 +35,6 @@ export const resolvers = {
         false
       )
         .then(result => {
-          console.log(`result: ${JSON.stringify(result, null, 2)}`)
           return result
         })
         .catch(e => {
