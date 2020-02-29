@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from "react-router-dom";
 import { useForm } from 'react-hook-form';  // https://react-hook-form.com
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
@@ -19,11 +20,12 @@ export const Login = () => {
   });
 
   const onSubmit = (data: any) => {
-    Login({ variables: { email: data.username, password: data.password} });
+    Login({ variables: { email: data.username, password: data.password } });
   };
 
   if (data) {
-    console.log(`Login received data: ${JSON.stringify(data, null, 2)}`);
+    localStorage.setItem("token", data.Login);
+    return <Redirect to={{ pathname: "/" }} />;
   }
 
   return (
