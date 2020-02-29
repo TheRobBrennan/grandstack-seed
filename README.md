@@ -17,6 +17,9 @@ $ npm run install-all
 
 # Start the back-end GraphQL server and the front-end React web application
 $ npm start
+
+# OPTIONAL: Remove all of the node_modules folders
+$ npm run clean
 ```
 
 ## Set up and configure a locally running instance of Neo4j
