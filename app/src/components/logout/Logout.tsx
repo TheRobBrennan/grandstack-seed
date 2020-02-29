@@ -1,8 +1,9 @@
 import React from 'react';
 import { Redirect } from "react-router-dom";
+import { logout } from '../../lib/logout';
 
 export const Logout = () => {
-  localStorage.removeItem("token");
+  logout();
   return <Redirect to={{ pathname: "/" }} />;
 };
 
