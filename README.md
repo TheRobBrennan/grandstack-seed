@@ -7,6 +7,7 @@ In order to get this project up and running on your development machine, you wil
 + Set up and configure a locally running instance of Neo4j
 + GraphQL server configuration
   + Define environment variables for the back-end GraphQL server
+  + [OPTIONAL] Additional configuration
 
 ## Set up and configure a locally running instance of Neo4j
 
@@ -97,6 +98,13 @@ NEO4J_PASSWORD=letmein
 JWT_SECRET=thisisabadsecrettousebutitworksforanexample
 ```
 
+### [OPTIONAL] Additional configuration
+
+1. There is a schema.graphql file that contains all of the app's type definitions and is run through a schema generator that converts Cypher queries (indicated by the `@cypher` or `@relationship` directives) into valid computed properties.
+2. You can turn on automatic query and mutation generation in the `server/src/index.js` file (which would generate queries for all of your defined types, and add/update/delete mutations for all of your types), although it is strongly recommended you write your own resolvers or computed properties using the directives mentioned above as it will give you more fine-grained control over your application.
+3. There is local authentication already built into the application. Please see this in action in the `server/src/resolvers.js` file.
+4. You can create even more complex queries and mutations by leverage in the `neo4jgraphql` method that is exposed by `neo4j-graphql-js` package by mutating data passed into a query/mutation before it hits your neo4j database, you can see this in `server/src/resolvers.js` on `lines 11-12` where passwords are being hashed and salted by `bcrypt`
+
 ## Client application
 
 For this project, we replaced the client originally supplied by the example code with a simple app.
@@ -118,23 +126,3 @@ To generate a new app using [create-react-app](https://create-react-app.dev) and
 ```sh
 $ npx create-react-app app --template typescript
 ```
-
-## Seed project set-up
-
-For reference, I've created a sample `server/.env.sample` file that you can copy to `server/.env` and tweak as necessary.
-
-
-3. Install dependencies in the root and for both the server and client by running `npm install` in the root directory, followed by `npm run install-all` in the root directory.
-
-4. Start  both servers by running `npm start` in the root of the project`
-
-5. Start dev-ing!
-
-## Project configuration
-
-### Server configuration
-
-1. There is a schema.graphql file that contains all of the app's type definitions and is run through a schema generator that converts Cypher queries (indicated by the `@cypher` or `@relationship` directives) into valid computed properties.
-2. You can turn on automatic mutation generation on `line 44` of the `server/src/index.js` file and mutation on `line 45` (this will generate queries for all of your defined types, and add/update/delete mutations for all of your types as well) though I recommend writing your own resolvers or computed properties using the directives mentioned above as it will give you more fine-grained control over your application.
-3. There is local authentication already built into the application, you can see this in action in the `server/src/resolvers.js` file.
-4. You can create even more complex queries and mutations by leverage in the `neo4jgraphql` method that is exposed by `neo4j-graphql-js` package by mutating data passed into a query/mutation before it hits your neo4j database, you can see this in `server/src/resolvers.js` on `lines 8-12` where passwords are being hashed and salted by `bcrypt`
