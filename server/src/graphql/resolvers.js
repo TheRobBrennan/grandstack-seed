@@ -1,9 +1,8 @@
-import { neo4jgraphql, cypherQuery } from 'neo4j-graphql-js'
-import jwt from 'jsonwebtoken'
+import { neo4jgraphql } from 'neo4j-graphql-js'
 import bcrypt from 'bcrypt'
-import { pick, isNil } from 'lodash'
+import { isNil } from 'lodash'
 
-import { createToken } from './auth/auth'
+import { createToken } from '../auth/auth'
 
 export const resolvers = {
   Mutation: {
@@ -25,6 +24,7 @@ export const resolvers = {
        * $ MATCH (n) RETURN n, labels(n)
        */
 
+      console.log(`user: ${JSON.stringify(user, null, 2)}`)
       // Attempt to create the user account
       return neo4jgraphql(
         object,
