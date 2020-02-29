@@ -30,7 +30,7 @@ export const Login = () => {
     }
   }
 
-  if (data) {
+  if (data && data.Login) {
     storeAuthenticationToken(data.Login);
     return <Redirect to={{ pathname: "/" }} />;
   }
