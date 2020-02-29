@@ -5,6 +5,7 @@ import { useMutation } from '@apollo/react-hooks';
 
 import { SIGN_IN } from '../../graphql/mutations/signIn';
 import { storeAuthenticationToken } from '../../lib/store-authentication-token';
+import ErrorMessage from '../error-message/error-message'
 
 export const Login = () => {
   let friendlyErrorMessage;
@@ -38,9 +39,7 @@ export const Login = () => {
   return (
     <>
       <h1>Login</h1>
-      {error && error.message && (
-        <p style={{ color: 'red' }}>{friendlyErrorMessage}</p>
-      )}
+      <ErrorMessage error={error} friendlyErrorMessage={friendlyErrorMessage} />
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label htmlFor="email">Email</label>
