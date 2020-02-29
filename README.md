@@ -9,6 +9,16 @@ To get this project up and running on your development machine, you will need to
   + Define environment variables for the back-end GraphQL server
   + [OPTIONAL] Additional configuration
 
+Once you have configured Neo4j and the back-end GraphQL server, you can run the following from the root directory of this project:
+
+```sh
+# Install all of the required dependencies for this project and the related client and server applications
+$ npm run install-all
+
+# Start the back-end GraphQL server and the front-end React web application
+$ npm start
+```
+
 ## Set up and configure a locally running instance of Neo4j
 
 The easiest way to work with this project is to download and install the free [Neo4j Desktop](https://neo4j.com/product/#desktop) for your development environment.
