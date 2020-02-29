@@ -26,10 +26,6 @@ export const driver = neo4j.driver(
   )
 );
 
-if (process.env.FB_ID && process.env.FB_SECRET) {
-  require("./auth/facebook");
-}
-
 // Add Middleware to our Express server
 app.use(cors());
 app.use(injectUser);
