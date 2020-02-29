@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom";
 import { useForm } from 'react-hook-form';  // https://react-hook-form.com
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
+import ErrorMessage from '../error-message/error-message'
 
 const REGISTER = gql`
   mutation RegisterMutation(
@@ -53,10 +54,7 @@ export const Register = () => {
   return (
     <>
       <h1>Register</h1>
-      {error && error.message && (
-        <p style={{ color: 'red' }}>{friendlyErrorMessage}</p>
-      )}
-
+      <ErrorMessage error={error} friendlyErrorMessage={friendlyErrorMessage} />
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label htmlFor="username">Username</label>
