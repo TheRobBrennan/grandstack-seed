@@ -55,7 +55,9 @@ const schema = makeAugmentedSchema({
   typeDefs,
   resolvers,
   config: {
+    // Set to true if you want neo4j-graphql-js to automatically generate queries based on your schema
     query: false,
+    // Set to true if you want neo4j-graphql-js to automatically generate mutations based on your schema
     mutation: false
   }
 });
