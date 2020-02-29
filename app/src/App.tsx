@@ -3,10 +3,11 @@ import React from 'react';
 // Components
 import { AuthRoute } from './components/auth-route/auth-route';
 import Login from './components/login/Login';
+import Logout from './components/logout/Logout';
 import Register from './components/register/Register';
 
 // Routing
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 // Apollo and GraphQL imports
 import { ApolloClient } from 'apollo-client';
@@ -35,10 +36,7 @@ function App() {
         <Switch>
           <AuthRoute exact path="/" />
           <Route exact path="/login" component={Login} />
-          <Route exact path="/logout" render={() => {
-            localStorage.removeItem("token");
-            return <Redirect to={{ pathname: "/" }} />;
-          }} />
+          <Route exact path="/logout" component={Logout} />
           <Route exact path="/register" component={Register} />
         </Switch>
       </BrowserRouter>
