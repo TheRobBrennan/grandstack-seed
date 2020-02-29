@@ -1,10 +1,12 @@
 # GRANDstack seed
 
-This project was originally inspired by existing work from [@erikrahm](https://github.com/erikrahm) in the repo [https://github.com/erikrahm/grand-stack-seed](https://github.com/erikrahm/grand-stack-seed)
+This GRANDStack ([GraphQL](https://graphql.org), [React](https://reactjs.org), [Apollo](https://www.apollographql.com), [Neo4j Database](https://neo4j.com)) seed project contains built-in local authentication against a Neo4j back-end database - originally inspired by existing work from [@erikrahm](https://github.com/erikrahm) in the repo [https://github.com/erikrahm/grand-stack-seed](https://github.com/erikrahm/grand-stack-seed)
 
-GRANDStack ([GraphQL](https://graphql.org), [React](https://reactjs.org), [Apollo](https://www.apollographql.com), [Neo4j Database](https://neo4j.com)) seed project with built-in Local Auth and Facebook OAuth, and sample User GQL types/queries/mutations.
+In order to get this project up and running on your development machine, you will need to:
 
-## Neo4j set-up and configuration
++ Set up and configure a locally running instance of Neo4j
+
+## Set up and configure a locally running instance of Neo4j
 
 The easiest way to work with this project is to download and install the free [Neo4j Desktop](https://neo4j.com/product/#desktop) for your development environment.
 
@@ -107,27 +109,17 @@ For reference, I've created a sample `server/.env.sample` file that you can copy
 
 ## Project configuration
 
-### Enable Facebook OAuth
-
-Facebook OAuth by default is disabled, to allow for users of this seed project without interest in OAuth to forego it altogether. If you would like to enable it all you have to do is create a new app at https://developers.facebook.com and then add the app credentials to the `.env` file in the `./server` directory.
-
- FB_ID= *Get this from https://developers.facebook.com*
-
- FB_SECRET= *Get this from https://developers.facebook.com*
-
-If you plan to run this project locally (on localhost) then make sure to edit the Facebook App's settings and add `localhost` to the App Domains field and add `http://localhost:8000/` as the Site Url in the Website list at the bottom of the settings.
-
 ### Server configuration
 
 1. There is a schema.graphql file that contains all of the app's type definitions and is run through a schema generator that converts Cypher queries (indicated by the `@cypher` or `@relationship` directives) into valid computed properties.
 2. You can turn on automatic mutation generation on `line 44` of the `server/src/index.js` file and mutation on `line 45` (this will generate queries for all of your defined types, and add/update/delete mutations for all of your types as well) though I recommend writing your own resolvers or computed properties using the directives mentioned above as it will give you more fine-grained control over your application.
-3. There is Local already built into the application, you can see this in action in the `server/src/resolvers.js` file. Facebook OAuth is also built-in and can be seen in the `server/src/index.js` file!
+3. There is local authentication already built into the application, you can see this in action in the `server/src/resolvers.js` file.
 4. You can create even more complex queries and mutations by leverage in the `neo4jgraphql` method that is exposed by `neo4j-graphql-js` package by mutating data passed into a query/mutation before it hits your neo4j database, you can see this in `server/src/resolvers.js` on `lines 8-12` where passwords are being hashed and salted by `bcrypt`
 
 ### Client configuration
 
  1. This is just a basic Create React App (with typescript) that can be configured to your heart's content. (If you're unfamiliar with how to do this there are many resources available online.
- 2. The app is wrapped in an `ApolloProvider` making your GraphQL server queriable throughout the app. (This happens in `client/src/components/App.tsx`
+ 2. The app is wrapped in an `ApolloProvider` making your GraphQL server queriable throughout the app. This happens in `client/src/components/App.tsx`
  3. The app is also wrapped in a `BrowserRouter` from `react-router` and you can define your routes as you see fit.
 
 - There is an authenticated route at `/` that can only be accessed once a user is logged in.
