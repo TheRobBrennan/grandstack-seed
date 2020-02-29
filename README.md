@@ -174,9 +174,9 @@ JWT_SECRET=thisisabadsecrettousebutitworksforanexample
 ### [OPTIONAL] Additional configuration
 
 1. There is a schema.graphql file that contains all of the app's type definitions and is run through a schema generator that converts Cypher queries (indicated by the `@cypher` or `@relationship` directives) into valid computed properties.
-2. You can turn on automatic query and mutation generation in the `server/src/index.js` file (which would generate queries for all of your defined types, and add/update/delete mutations for all of your types), although it is strongly recommended you write your resolvers or computed properties using the directives mentioned above as it will give you more fine-grained control over your application.
-3. There is local authentication already built into the application. Please see this in action in the `server/src/resolvers.js` file.
-4. You can create even more complex queries and mutations by leverage in the `neo4jgraphql` method that is exposed by `neo4j-graphql-js` package by mutating data passed into a query/mutation before it hits your neo4j database, you can see this in `server/src/resolvers.js` on `lines 11-12` where passwords are being hashed and salted by `bcrypt`
+2. You can turn on automatic query and mutation generation in the `server/src/graphql/graphql-schema.js` file (which would generate queries for all of your defined types, and add/update/delete mutations for all of your types), although it is strongly recommended you write your resolvers or computed properties using the directives mentioned above as it will give you more fine-grained control over your application.
+3. There is local authentication already built into the application. Please see this in action in the `server/src/graphql/resolvers.js` file.
+4. You can create even more complex queries and mutations by leverage in the `neo4jgraphql` method that is exposed by `neo4j-graphql-js` package by mutating data passed into a query/mutation before it hits your neo4j database, you can see this in `server/src/graphql/resolvers.js` where passwords are being hashed and salted by `bcrypt` in the `RegisterUser` mutation before being passed along to our back-end database.
 
 ## Review the client application
 
