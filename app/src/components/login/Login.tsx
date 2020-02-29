@@ -11,17 +11,28 @@ const SIGN_IN = gql`
 `;
 
 export const Login = () => {
-  const [Login, { data }] = useMutation(SIGN_IN);
+  let friendlyErrorMessage
+  const [Login, { data, error }] = useMutation(SIGN_IN);
   const { register, handleSubmit } = useForm({
     defaultValues: {
-      username: 'rob@therobbrennan.com',
+      email: 'rob@therobbrennan.com',
       password: 'testtest',
     }
   });
 
   const onSubmit = (data: any) => {
-    Login({ variables: { email: data.username, password: data.password } });
+    Login({ variables: { email: data.email, password: data.password } }).catch(err => {
+      console.error(`Unable to register a new user: ${err}`)
+    });
   };
+
+  if (error && error.message) {
+    switch (true) {
+      default:
+        friendlyErrorMessage = `Unable to login. Either your password is incorrect, or you need to create an account.`
+        break
+    }
+  }
 
   if (data) {
     localStorage.setItem("token", data.Login);
@@ -31,10 +42,13 @@ export const Login = () => {
   return (
     <>
       <h1>Login</h1>
+      {error && error.message && (
+        <p style={{ color: 'red' }}>{friendlyErrorMessage}</p>
+      )}
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
-          <label htmlFor="username">Username</label>
-          <input name="username" ref={register} />
+          <label htmlFor="email">Email</label>
+          <input name="email" ref={register} />
         </div>
         <div>
           <label htmlFor="password">Password</label>
@@ -42,7 +56,7 @@ export const Login = () => {
         </div>
         <button type="submit">Submit</button>
       </form>
-      <p>Need an account? Click <Link to="/register">here</Link> to <Link to="/register">register</Link>.</p>
+      <p>Need an account? Please <Link to="/register">register</Link>.</p>
     </>
   );
 };
