@@ -21,14 +21,15 @@ export const Register = () => {
   const [RegisterUser, { data, error }] = useMutation(REGISTER);
   const { register, handleSubmit } = useForm({
     defaultValues: {
-      username: 'rob@therobbrennan.com',
+      email: 'rob@therobbrennan.com',
+      username: 'therobbrennan',
       password: 'testtest',
       confirmPassword: 'testtest'
     }
   });
 
   const onSubmit = (data: any) => {
-    RegisterUser({ variables: { email: data.username, username: data.username, password: data.password } }).catch(err => {
+    RegisterUser({ variables: { email: data.email, username: data.username, password: data.password } }).catch(err => {
       console.error(`Unable to register a new user: ${err}`)
     });
   };
@@ -60,6 +61,10 @@ export const Register = () => {
         <div>
           <label htmlFor="username">Username</label>
           <input name="username" ref={register} />
+        </div>
+        <div>
+          <label htmlFor="email">Email</label>
+          <input name="email" ref={register} />
         </div>
         <div>
           <label htmlFor="password">Password</label>
