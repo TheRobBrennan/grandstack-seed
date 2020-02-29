@@ -2,10 +2,10 @@ import cors from "cors";
 import express from "express";
 import dotenv from "dotenv";
 import { ApolloServer } from "apollo-server-express";
-import { v1 as neo4j } from "neo4j-driver";
 import { makeAugmentedSchema } from "neo4j-graphql-js";
 
-import { DEFAULT_JWT_SECRET, DEFAULT_NEO4J } from './config/constants'
+import { DEFAULT_JWT_SECRET } from './config/constants'
+import { driver } from './config/neo4j'
 import { injectUser } from './middleware/inject-user'
 import { typeDefs } from "./graphql-schema";
 import { resolvers } from "./resolvers";
@@ -16,15 +16,6 @@ export const SECRET = process.env.JWT_SECRET || DEFAULT_JWT_SECRET;
 
 // Create express app
 export const app = express();
-
-// Create a configured neo4j driver instance (this doesn't start a session)
-export const driver = neo4j.driver(
-  process.env.NEO4J_URI || DEFAULT_NEO4J.URI,
-  neo4j.auth.basic(
-    process.env.NEO4J_USER || DEFAULT_NEO4J.USER,
-    process.env.NEO4J_PASSWORD || DEFAULT_NEO4J.PASSWORD,
-  )
-);
 
 // Add Middleware to our Express server
 app.use(cors());
