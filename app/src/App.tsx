@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Components
-import AuthRoute from './components/auth-route/auth-route';
+import AuthRoute   from './components/auth-route/auth-route';
 import Login from './components/login/Login';
 import Logout from './components/logout/Logout';
 import Register from './components/register/Register';
