@@ -8,6 +8,7 @@ To get this project up and running on your development machine, you will need to
 + GraphQL server configuration
   + Define environment variables for the back-end GraphQL server
   + [OPTIONAL] Additional configuration
++ Review the client application
 
 Once you have configured Neo4j and the back-end GraphQL server, you can run the following from the root directory of this project:
 
@@ -177,9 +178,9 @@ JWT_SECRET=thisisabadsecrettousebutitworksforanexample
 3. There is local authentication already built into the application. Please see this in action in the `server/src/resolvers.js` file.
 4. You can create even more complex queries and mutations by leverage in the `neo4jgraphql` method that is exposed by `neo4j-graphql-js` package by mutating data passed into a query/mutation before it hits your neo4j database, you can see this in `server/src/resolvers.js` on `lines 11-12` where passwords are being hashed and salted by `bcrypt`
 
-## Client application
+## Review the client application
 
-For this project, we replaced the client originally supplied by the example code with a simple app.
+For this project, we replaced the client originally supplied by the example code with a simple React web application.
 
 ### [OPTIONAL] Generate a new create-react-app with TypeScript
 
