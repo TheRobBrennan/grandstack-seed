@@ -1,17 +1,13 @@
 import React from 'react';
 import { Redirect, Link } from "react-router-dom";
 import { useForm } from 'react-hook-form';  // https://react-hook-form.com
-import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
 
-const SIGN_IN = gql`
-  mutation LoginMutation($email: String!, $password: String!) {
-    Login(email: $email, password: $password)
-  }
-`;
+import { SIGN_IN } from '../../graphql/mutations/signIn';
+import { storeAuthenticationToken } from '../../lib/store-authentication-token';
 
 export const Login = () => {
-  let friendlyErrorMessage
+  let friendlyErrorMessage;
   const [Login, { data, error }] = useMutation(SIGN_IN);
   const { register, handleSubmit } = useForm({
     defaultValues: {
@@ -22,20 +18,20 @@ export const Login = () => {
 
   const onSubmit = (data: any) => {
     Login({ variables: { email: data.email, password: data.password } }).catch(err => {
-      console.error(`Unable to register a new user: ${err}`)
+      console.error(`Unable to register a new user: ${err}`);
     });
   };
 
   if (error && error.message) {
     switch (true) {
       default:
-        friendlyErrorMessage = `Unable to login. Either your password is incorrect, or you need to create an account.`
-        break
+        friendlyErrorMessage = `Unable to login. Either your password is incorrect, or you need to create an account.`;
+        break;
     }
   }
 
   if (data) {
-    localStorage.setItem("token", data.Login);
+    storeAuthenticationToken(data.Login);
     return <Redirect to={{ pathname: "/" }} />;
   }
 
