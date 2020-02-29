@@ -2,7 +2,7 @@
 
 This GRANDStack ([GraphQL](https://graphql.org), [React](https://reactjs.org), [Apollo](https://www.apollographql.com), [Neo4j Database](https://neo4j.com)) seed project contains built-in local authentication against a Neo4j back-end database - originally inspired by existing work from [@erikrahm](https://github.com/erikrahm) in the repo [https://github.com/erikrahm/grand-stack-seed](https://github.com/erikrahm/grand-stack-seed)
 
-In order to get this project up and running on your development machine, you will need to:
+To get this project up and running on your development machine, you will need to:
 
 + Set up and configure a locally running instance of Neo4j
 + GraphQL server configuration
@@ -107,7 +107,7 @@ If no constraints have been defined, you'll see a result of "(no changes, no rec
 
 #### Create constraints for the User node
 
-For this specific example, we allow users the ability to choose a username for their account as well as supply an email address. We need to prevent users from creating more than one account with the same email address. We also need to prevent users from registering a username that has already been taken.
+For this specific example, we allow users the ability to choose a username for their account as well as supply an email address. We need to prevent users from creating more than one account with the same email address. We also need to prevent users from registering for a username that has already been taken.
 
 To ensure that we do not have more than one User node with the same email address:
 
@@ -145,7 +145,7 @@ Before you can run the GraphQL server, you will need to define a few environment
 
 For reference, I've created a sample `server/.env.sample` file that you can copy to `server/.env` and tweak as necessary.
 
-The following environment variables must be defined in order for your GraphQL server to run:
+The following environment variables must be defined for your GraphQL server to run:
 
 ```sh
 # Neo4j
@@ -160,7 +160,7 @@ JWT_SECRET=thisisabadsecrettousebutitworksforanexample
 ### [OPTIONAL] Additional configuration
 
 1. There is a schema.graphql file that contains all of the app's type definitions and is run through a schema generator that converts Cypher queries (indicated by the `@cypher` or `@relationship` directives) into valid computed properties.
-2. You can turn on automatic query and mutation generation in the `server/src/index.js` file (which would generate queries for all of your defined types, and add/update/delete mutations for all of your types), although it is strongly recommended you write your own resolvers or computed properties using the directives mentioned above as it will give you more fine-grained control over your application.
+2. You can turn on automatic query and mutation generation in the `server/src/index.js` file (which would generate queries for all of your defined types, and add/update/delete mutations for all of your types), although it is strongly recommended you write your resolvers or computed properties using the directives mentioned above as it will give you more fine-grained control over your application.
 3. There is local authentication already built into the application. Please see this in action in the `server/src/resolvers.js` file.
 4. You can create even more complex queries and mutations by leverage in the `neo4jgraphql` method that is exposed by `neo4j-graphql-js` package by mutating data passed into a query/mutation before it hits your neo4j database, you can see this in `server/src/resolvers.js` on `lines 11-12` where passwords are being hashed and salted by `bcrypt`
 
