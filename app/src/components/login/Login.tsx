@@ -1,5 +1,12 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';  // https://react-hook-form.com
+import gql from 'graphql-tag';
+
+const SIGN_IN = gql`
+  mutation LoginMutation($email: String!, $password: String!) {
+    Login(email: $email, password: $password)
+  }
+`;
 
 export const Login = () => {
   const { register, handleSubmit } = useForm({
