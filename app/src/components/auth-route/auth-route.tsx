@@ -13,3 +13,4 @@ export const AuthRoute = ({ ...props }) => (
     }
   />
 );
+export default AuthRoute;
