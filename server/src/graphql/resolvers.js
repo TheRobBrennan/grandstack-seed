@@ -24,7 +24,6 @@ export const resolvers = {
        * $ MATCH (n) RETURN n, labels(n)
        */
 
-      console.log(`user: ${JSON.stringify(user, null, 2)}`)
       // Attempt to create the user account
       return neo4jgraphql(
         object,
