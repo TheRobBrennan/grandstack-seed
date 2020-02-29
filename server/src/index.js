@@ -6,22 +6,23 @@ import { v1 as neo4j } from "neo4j-driver";
 import { makeAugmentedSchema } from "neo4j-graphql-js";
 import jwt from "jsonwebtoken";
 
+import { DEFAULT_JWT_SECRET, DEFAULT_NEO4J } from './config/constants'
 import { typeDefs } from "./graphql-schema";
 import { resolvers } from "./resolvers";
 
 // Graph our environment variables from our .env file and create a variable for our JWT secret
 dotenv.config();
-export const SECRET = process.env.JWT_SECRET || "thisisabadsecrettousebutitworksforanexample";
+export const SECRET = process.env.JWT_SECRET || DEFAULT_JWT_SECRET;
 
 // Create express app
 export const app = express();
 
 // Create a configured neo4j driver instance (this doesn't start a session)
 export const driver = neo4j.driver(
-  process.env.NEO4J_URI || "bolt://localhost:7687",
+  process.env.NEO4J_URI || DEFAULT_NEO4J.URI,
   neo4j.auth.basic(
-    process.env.NEO4J_USER || "neo4j",
-    process.env.NEO4J_PASSWORD || "neo4j"
+    process.env.NEO4J_USER || DEFAULT_NEO4J.USER,
+    process.env.NEO4J_PASSWORD || DEFAULT_NEO4J.PASSWORD,
   )
 );
 
