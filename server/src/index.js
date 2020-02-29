@@ -4,9 +4,9 @@ import dotenv from "dotenv";
 import { ApolloServer } from "apollo-server-express";
 import { v1 as neo4j } from "neo4j-driver";
 import { makeAugmentedSchema } from "neo4j-graphql-js";
-import jwt from "jsonwebtoken";
 
 import { DEFAULT_JWT_SECRET, DEFAULT_NEO4J } from './config/constants'
+import { injectUser } from './middleware/inject-user'
 import { typeDefs } from "./graphql-schema";
 import { resolvers } from "./resolvers";
 
@@ -25,21 +25,6 @@ export const driver = neo4j.driver(
     process.env.NEO4J_PASSWORD || DEFAULT_NEO4J.PASSWORD,
   )
 );
-
-// Custom middleware to add a user object to the server requests
-const injectUser = async req => {
-  const token = req.headers.authorization;
-  try {
-    const { user } = await jwt.verify(token, SECRET);
-    req.user = user;
-  } catch (error) {
-    // We don't care about null tokens; they will always be improperly formed JWT requests
-    if (!token || token === null) {
-      console.error(error);
-    }
-  }
-  req.next();
-};
 
 if (process.env.FB_ID && process.env.FB_SECRET) {
   require("./auth/facebook");
