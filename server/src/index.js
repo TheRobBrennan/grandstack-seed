@@ -1,11 +1,10 @@
 import cors from "cors";
 import express from "express";
 import dotenv from "dotenv";
-import { ApolloServer, gql } from "apollo-server-express";
+import { ApolloServer } from "apollo-server-express";
 import { v1 as neo4j } from "neo4j-driver";
-import { makeAugmentedSchema, neo4jgraphql } from "neo4j-graphql-js";
+import { makeAugmentedSchema } from "neo4j-graphql-js";
 import jwt from "jsonwebtoken";
-import { isNil, kebabCase } from "lodash";
 
 import { typeDefs } from "./graphql-schema";
 import { resolvers } from "./resolvers";
