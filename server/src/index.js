@@ -8,11 +8,9 @@ import cors from 'cors'
 import express from 'express'
 import dotenv from 'dotenv'
 import { ApolloServer } from 'apollo-server-express'
-import { makeAugmentedSchema } from 'neo4j-graphql-js'
-import { driver } from './config/neo4j'
+import { driver as neo4j } from './config/neo4j'
+import { schema } from './graphql/graphql-schema'
 import { injectUser } from './middleware/inject-user'
-import { typeDefs } from './graphql-schema'
-import { resolvers } from './resolvers'
 
 // Graph our environment variables from our .env file and create a variable for our JWT secret
 dotenv.config()
@@ -25,22 +23,17 @@ export const app = express()
 app.use(cors())
 app.use(injectUser)
 
-// Create a schema out of our typedefs and resolvers
-// Alter query and mutation flags for auto generation by neo4j-graphql-js
-const schema = makeAugmentedSchema({
-  typeDefs,
-  resolvers,
-  config: {
-    // Set to true if you want neo4j-graphql-js to automatically generate queries based on your schema
-    query: false,
-    // Set to true if you want neo4j-graphql-js to automatically generate mutations based on your schema
-    mutation: false
-  }
-})
-
 // Create a new apollo server and pass in the Neo4j Driver, JWT Secret, and User object into the server as Context
 const server = new ApolloServer({
-  context: ({ req }) => ({ driver, SECRET, user: req.user || null }),
+  context: ({ req }) => ({
+    driver: neo4j(
+      process.env.NEO4J_URI,
+      process.env.NEO4J_USER,
+      process.env.NEO4J_PASSWORD
+    ),
+    SECRET,
+    user: req.user || null
+  }),
   schema
 })
 

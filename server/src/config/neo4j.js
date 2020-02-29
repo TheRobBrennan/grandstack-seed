@@ -7,10 +7,10 @@ export const DEFAULT_NEO4J = {
 }
 
 // Create a configured neo4j driver instance (this doesn't start a session)
-export const driver = neo4j.driver(
-  process.env.NEO4J_URI || DEFAULT_NEO4J.URI,
+export const driver = (uri, user, password) => neo4j.driver(
+  uri || DEFAULT_NEO4J.URI,
   neo4j.auth.basic(
-    process.env.NEO4J_USER || DEFAULT_NEO4J.USER,
-    process.env.NEO4J_PASSWORD || DEFAULT_NEO4J.PASSWORD,
+    user || DEFAULT_NEO4J.USER,
+    password || DEFAULT_NEO4J.PASSWORD,
   )
 );
