@@ -1,3 +1,3 @@
-export const logout = () => {
+export const removeAuthenticationToken = () => {
   localStorage.removeItem("token");
 }

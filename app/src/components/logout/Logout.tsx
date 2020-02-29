@@ -1,9 +1,9 @@
 import React from 'react';
 import { Redirect } from "react-router-dom";
-import { logout } from '../../lib/remove-authentication-token';
+import { removeAuthenticationToken } from '../../lib/remove-authentication-token';
 
 export const Logout = () => {
-  logout();
+  removeAuthenticationToken();
   return <Redirect to={{ pathname: "/" }} />;
 };
 
