@@ -14,8 +14,10 @@ import { concat } from "apollo-link";
 import { InMemoryCache, NormalizedCacheObject } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
 import { ApolloProvider } from '@apollo/react-hooks';
+
 import { GRAPHQL_URI } from './config/constants';
 import { authMiddleware } from './middleware/auth-middleware';
+import { checkAuth } from './lib/check-auth';
 
 // Apollo and GraphQL constants
 const httpLink = new HttpLink({
@@ -26,21 +28,6 @@ const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
   link: concat(authMiddleware, httpLink),
   cache: new InMemoryCache()
 });
-
-const checkAuth = () => {
-  const token = localStorage.getItem("token");
-  if (token) {
-    return true;
-  } else {
-    const queryParams = new URLSearchParams(window.location.search);
-    const altToken = queryParams.get("token");
-    if (altToken) {
-      localStorage.setItem("token", altToken);
-      return true;
-    }
-    return false;
-  }
-};
 
 const AuthRoute = ({ ...props }) => (
   <Route
