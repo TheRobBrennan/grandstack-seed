@@ -19,6 +19,11 @@ Once you have installed the free [Neo4j Desktop](https://neo4j.com/product/#desk
 + Create a new graph database
 + Start the graph database
 + Launch the Neo4j browser
++ Review the schema for the graph
++ Review constraints for the graph
+  + Create constraints for the User node
+  + [OPTIONAL] Remove constraints for the User node
++ [OPTIONAL] Empty the database
 
 ### Create a new project
 
@@ -78,6 +83,60 @@ Please see [Neo4j Browser User Interface Guide](https://neo4j.com/developer/neo4
 
 ![screenshots/screenshot-09-example-launch-of-neo4j-browser.png](screenshots/screenshot-09-example-launch-of-neo4j-browser.png)
 
+### Review the schema for the graph
+
+If you would see the schema of your graph, you can run the following Cypher query:
+
+```sh
+$ CALL db.schema()
+```
+
+This will show you the simplest structure of your graph. Give it a whirl!
+
+### Review constraints for the graph
+
+Once you have your database running, you'll want to define constraints so that Neo4j will prevent User nodes from being added for existing email addresses or user names:
+
+To see what constraints have been defined for your graph database already, run the following Cypher query:
+
+```sh
+$ CALL db.constraints()
+```
+
+If no constraints have been defined, you'll see a result of "(no changes, no records)"
+
+#### Create constraints for the User node
+
+For this specific example, we allow users the ability to choose a username for their account as well as supply an email address. We need to prevent users from creating more than one account with the same email address. We also need to prevent users from registering a username that has already been taken.
+
+To ensure that we do not have more than one User node with the same email address:
+
+```sh
+$ CREATE CONSTRAINT ON ( user:User ) ASSERT user.email IS UNIQUE
+```
+
+To ensure that we do not have more than one User node with the same username:
+```sh
+$ CREATE CONSTRAINT ON ( user:User ) ASSERT user.username IS UNIQUE
+```
+
+#### [OPTIONAL] Remove constraints for the User node
+
+If you would like to remove these constraints from your database, simply replace `CREATE` in the above Cypher queries with `DROP`:
+
+```sh
+$ DROP CONSTRAINT ON ( user:User ) ASSERT user.email IS UNIQUE
+$ DROP CONSTRAINT ON ( user:User ) ASSERT user.username IS UNIQUE
+```
+
+### [OPTIONAL] Empty the database
+
+If you would like to delete all nodes and relationships from your graph database - and **NOT** delete/remove any constraints you have defined - you can run the following Cypher query:
+
+```sh
+$ MATCH (n) DETACH DELETE n
+```
+
 ## GraphQL server configuration
 
 Before you can run the GraphQL server, you will need to define a few environment variables for the application.
@@ -108,16 +167,6 @@ JWT_SECRET=thisisabadsecrettousebutitworksforanexample
 ## Client application
 
 For this project, we replaced the client originally supplied by the example code with a simple app.
-
-### Client configuration
-
- 1. This is just a basic Create React App (with typescript) that can be configured to your heart's content. (If you're unfamiliar with how to do this there are many resources available online.
- 2. The app is wrapped in an `ApolloProvider` making your GraphQL server queriable throughout the app. This happens in `client/src/components/App.tsx`
- 3. The app is also wrapped in a `BrowserRouter` from `react-router` and you can define your routes as you see fit.
-
-- There is an authenticated route at `/` that can only be accessed once a user is logged in.
-
-- There is a `/register` route that has some default styled form fields that handle user registration and a `/login` route to authenticate a user.
 
 ### [OPTIONAL] Generate a new create-react-app with TypeScript
 
