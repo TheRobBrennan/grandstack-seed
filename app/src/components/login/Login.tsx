@@ -1,6 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';  // https://react-hook-form.com
 import gql from 'graphql-tag';
+import { useMutation } from '@apollo/react-hooks';
 
 const SIGN_IN = gql`
   mutation LoginMutation($email: String!, $password: String!) {
@@ -9,6 +10,7 @@ const SIGN_IN = gql`
 `;
 
 export const Login = () => {
+  const [Login, { data }] = useMutation(SIGN_IN);
   const { register, handleSubmit } = useForm({
     defaultValues: {
       username: 'rob@therobbrennan.com',
@@ -17,9 +19,12 @@ export const Login = () => {
   });
 
   const onSubmit = (data: any) => {
-    // TODO: Remove logging
-    console.log(JSON.stringify(data, null, 2));
+    Login({ variables: { email: data.username, password: data.password} });
   };
+
+  if (data) {
+    console.log(`Login received data: ${JSON.stringify(data, null, 2)}`);
+  }
 
   return (
     <>
