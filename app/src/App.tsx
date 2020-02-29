@@ -9,6 +9,7 @@ import Register from './components/register/Register';
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
 // Apollo and GraphQL imports
+import { GRAPHQL_URI } from './config/constants'
 import { ApolloClient } from 'apollo-client';
 import { ApolloLink, concat } from "apollo-link";
 import { InMemoryCache, NormalizedCacheObject } from 'apollo-cache-inmemory';
@@ -16,8 +17,6 @@ import { HttpLink } from 'apollo-link-http';
 import { ApolloProvider } from '@apollo/react-hooks';
 
 // Apollo and GraphQL constants
-const GRAPHQL_URI = 'http://localhost:8000/graphql';
-
 const httpLink = new HttpLink({
   uri: process.env.REACT_APP_GRAPHQL_URI || GRAPHQL_URI
 });
