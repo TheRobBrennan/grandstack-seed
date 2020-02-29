@@ -1,8 +1,9 @@
 import React from 'react';
 
 // Components
-import Login from './components/login/Login';
 import Placeholder from './components/placeholder/Placeholder';
+import Login from './components/login/Login';
+import Register from './components/register/Register';
 
 // Routing
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
@@ -72,6 +73,7 @@ function App() {
             localStorage.removeItem("token");
             return <Redirect to={{ pathname: "/" }} />;
           }} />
+          <Route exact path="/register" component={Register} />
         </Switch>
       </BrowserRouter>
     </ApolloProvider>
