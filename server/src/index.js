@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import { ApolloServer } from "apollo-server-express";
 import { makeAugmentedSchema } from "neo4j-graphql-js";
 
-import { GRAPHQL_URI, DEFAULT_JWT_SECRET } from './config/constants'
+import { DEFAULT_GRAPHQL_PORT, DEFAULT_GRAPHQL_URI, DEFAULT_JWT_SECRET } from './config/constants'
 import { driver } from './config/neo4j'
 import { injectUser } from './middleware/inject-user'
 import { typeDefs } from "./graphql-schema";
@@ -44,8 +44,8 @@ const server = new ApolloServer({
 server.applyMiddleware({ app, path: "/graphql" });
 
 // Open up a port and start the server on it
-app.listen({ port: process.env.GRAPHQL_LISTEN_PORT || 8000 }, () => {
+app.listen({ port: process.env.GRAPHQL_PORT || DEFAULT_GRAPHQL_PORT }, () => {
   console.log(
-    `🚀 Server live at ${process.env.GRAPHQL_URI || GRAPHQL_URI} 🚀`
+    `🚀 Server live at ${process.env.GRAPHQL_URI || DEFAULT_GRAPHQL_URI} 🚀`
   );
 });
