@@ -26,9 +26,15 @@ export const resolvers = {
        */
 
       // Attempt to create the user account
-      return neo4jgraphql(object, user, context, resolveInfo, true)
+      return neo4jgraphql(
+        object,
+        user,
+        context,
+        resolveInfo,
+        // Set debug to false unless you want to see a plain text encrypted password in your log 😳
+        false
+      )
         .then(result => {
-          console.log(`result: ${JSON.stringify(result, null, 2)}`)
           return result
         })
         .catch(e => {
