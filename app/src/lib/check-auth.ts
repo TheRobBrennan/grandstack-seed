@@ -1,3 +1,5 @@
+import { storeAuthenticationToken } from './store-authentication-token'
+
 export const checkAuth = () => {
   const token = localStorage.getItem("token");
   if (token) {
@@ -6,7 +8,7 @@ export const checkAuth = () => {
     const queryParams = new URLSearchParams(window.location.search);
     const altToken = queryParams.get("token");
     if (altToken) {
-      localStorage.setItem("token", altToken);
+      storeAuthenticationToken(altToken)
       return true;
     }
     return false;
