@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { useForm } from 'react-hook-form';  // https://react-hook-form.com
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
@@ -73,6 +73,7 @@ export const Register = () => {
           <input name="confirmPassword" ref={register} />
         </div>
         <button type="submit">Submit</button>
+        <p>Return to the <Link to={{ pathname: "/" }}>home page</Link></p>
       </form>
     </>
   );
