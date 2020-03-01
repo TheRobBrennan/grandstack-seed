@@ -24,6 +24,9 @@ services:
       - GRAPHQL_LISTEN_PORT=8000
       - GRAPHQL_URI=http://localhost:8000/graphql
     volumes:
+      # Map our local directory to the Docker container so our changes can immediately take effect
+      - ./server/src:/app/src
+      # Use the node_modules installed on the Docker image
       - /app/node_modules
     links:
     - neo4j
