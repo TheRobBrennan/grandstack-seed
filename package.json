@@ -1,7 +1,7 @@
 {
   "name": "grandstack-seed",
   "version": "0.0.0",
-  "description": "Seed project for building GRAND Stack applications.",
+  "description": "Seed project for building GRANDstack applications.",
   "scripts": {
     "start": "npx concurrently \"cd server && npm start\" \"cd app && npm start\"",
     "install-all": "npm install && cd server && npm --build-from-source install bcrypt && npm install && cd ../app && npm --build-from-source install bcrypt && npm install",
