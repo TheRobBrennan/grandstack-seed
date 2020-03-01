@@ -6,7 +6,11 @@
     "start": "npx concurrently \"cd server && npm start\" \"cd app && npm start\"",
     "install-all": "npm install && cd server && npm --build-from-source install bcrypt && npm install && cd ../app && npm --build-from-source install bcrypt && npm install",
     "clean": "rm -rf node_modules/ && cd server && rm -rf node_modules/ && cd ../app && rm -rf node_modules/",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docker:build": "docker-compose up --remove-orphans --build --force-recreate",
+    "docker:start": "docker-compose up",
+    "docker:stop": "docker-compose down",
+    "docker:nuke": "docker system prune -a && docker volume prune"
   },
   "keywords": [],
   "author": "",
