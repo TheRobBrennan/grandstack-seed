@@ -22,8 +22,9 @@ services:
       - NEO4J_USER=neo4j
       - NEO4J_PASSWORD=letmein
       - GRAPHQL_LISTEN_PORT=8000
-      - GRAPHQL_URI=http://server:8000/graphql
-
+      - GRAPHQL_URI=http://localhost:8000/graphql
+    volumes:
+      - /app/node_modules
     links:
     - neo4j
     depends_on:
@@ -34,8 +35,8 @@ services:
     ports:
       - 3000:3000
     environment:
-      - REACT_APP_GRAPHQL_URI=http://server:8000/graphql
-      - PROXY=http://server:8000/graphql
+      - REACT_APP_GRAPHQL_URI=http://localhost:8000/graphql
+      - PROXY=http://localhost:8000/graphql
     links:
     - server
     depends_on:
