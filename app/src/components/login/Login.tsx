@@ -19,7 +19,7 @@ export const Login = () => {
 
   const onSubmit = (data: any) => {
     Login({ variables: { email: data.email, password: data.password } }).catch(err => {
-      console.error(`Unable to register a new user: ${err}`);
+      console.error(`Unable to login user account: ${err}`);
     });
   };
 
