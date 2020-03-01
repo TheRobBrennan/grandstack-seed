@@ -16,7 +16,7 @@ import { InMemoryCache, NormalizedCacheObject } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
 import { ApolloProvider } from '@apollo/react-hooks';
 
-import { GRAPHQL_URI } from './config/constants';
+import { GRAPHQL_URI } from './graphql/apollo/apollo';
 import { authMiddleware } from './middleware/auth-middleware';
 
 // Apollo and GraphQL constants
