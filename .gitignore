@@ -109,3 +109,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# Neo4j mapping to Docker containers
+/neo4j/tmp/data
+/neo4j/tmp/import
+/neo4j/tmp/logs
+/neo4j/tmp/plugins
